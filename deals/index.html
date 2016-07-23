@@ -234,6 +234,12 @@ p{
 }
 .productcol{
     min-height: 175px;
+    
+}
+@media screen and (min-width: 480px) {
+    .productcol {
+       width: 276px;
+    }
 }
 .row.productrow {
   display: -webkit-box;
@@ -321,24 +327,26 @@ p{
     <span class="sr-only">Next</span>
   </a>
 </div>
-            <div class="container">
+            <div >
                
                 
                     <div class="titleThumb">
                         <h2 id="diskon_today">{{adadiskon}}</h2>
                     </div>
                     <div class="row productrow">
-                    <div class="col-xs-6 col-sm-3 productcol" ng-repeat="produk in data.produk">
-                        <div class="product">
-                            <a ng-href="{{domain}}/index.php?controller=product&id_product={{produk.id}}">
+                    <div class="col-xs-6   productcol" ng-repeat="produk in data.produk">
+                        <div class="product" >
+                            
+                            <a ng-href="http://{{domain}}/index.php?controller=product&id_product={{produk.id}}">
                             <img class="img-responsive" ng-src="http://{{produk.gambar}}">
                             </a>
+                            
                         </div>
                         <div class='deskripsiproduk'>
                         <p>{{produk.nama}}</p>
-                        <p><strike>{{produk.harga_awal}}</strike>&emsp;<span style="color:red">{{produk.nilai_voucher}} OFF</span></p>
+                        <p><strike>{{produk.harga_awal}}</strike>&emsp;<span style="color:red">{{produk.nilai_voucher}} <span ng-hide="produk.nilai_voucher ==''">OFF</span></span></p>
                                 <p><span class="pricecurrent">
-                                        <span style="font-size:16px;float: left">Rp </span>
+                                        <span style="font-size:16px;float: left" ng-hide="produk.harga_final == ''">Rp </span>
                                             <strong style="font-size: 24px">
                                                 {{produk.harga_final.slice(2)}}
                                             </strong>
@@ -352,6 +360,46 @@ p{
                 
                 
             </div>
+            <div>
+               
+                
+                    <div class="titleThumb">
+                        <h2 >{{adadiskon2}}</h2>
+                    </div>
+                    <div class="row productrow">
+                    <div class="col-xs-6 productcol" ng-repeat="produk in data2.produk">
+                        <div class="product" >
+                            
+                            <a  ng-href="http://{{domain}}/index.php?controller=product&id_product={{produk.id}}">
+                            <img class="img-responsive" ng-src="http://{{produk.gambar}}">
+                            </a>
+                            
+                        </div>
+                        <div ng-switch="produk.harga_final" class='deskripsiproduk'>
+                        <p>{{produk.nama}}</p>
+                        <p><strike>{{produk.harga_awal}}</strike>&emsp;<span style="color:red">{{produk.nilai_voucher}} <span ng-hide="produk.nilai_voucher ==''">OFF</span></span></p>
+                                <p><span class="pricecurrent">
+                                        <span style="font-size:16px;float: left" ng-hide="produk.harga_final == ''">Rp </span>
+                                        <strong style="font-size: 24px" ng-switch-default>
+                                                {{produk.harga_final.slice(2)}}
+                                            </strong>
+                                        <strong style="font-size: 24px" ng-switch-when="diskonhingga">
+                                            Diskon Hingga <span style="color:red">?????</span>
+                                            </strong>
+                                        
+                                            
+                                            
+                                        
+                            </span></p>
+                        <p>{{produk.code_voucher}}</p>
+                        </div>
+                    </div>
+                        </div>
+                 
+                
+                
+            </div>
+            
               <p style="text-align:center;color: #0e98bf;
     font-size: 20px;
     font-weight: 600;">Berlangganan Promo Ini Lewat Email</p>

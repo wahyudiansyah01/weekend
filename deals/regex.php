@@ -12,8 +12,8 @@ $deskripsivoucherminggupertama = "VOUCHER1";
 $deskripsivoucherminggukedua = "VOUCHER2";
 
 
-define($deskripsivoucherminggupertama, "xyz");
-define($deskripsivoucherminggukedua, "abc");
+define($deskripsivoucherminggupertama, "abc");
+define($deskripsivoucherminggukedua, "xyz");
 define("DOMAIN","http://localhost/prestashop");
 
 class produk{
@@ -131,8 +131,6 @@ function converjson($array){
        }
        
          
- 
-     
  
        
     }
