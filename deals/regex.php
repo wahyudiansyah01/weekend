@@ -5,7 +5,6 @@ require_once dirname(__FILE__).'/../../init.php';
 setlocale(LC_MONETARY, 'id_ID.utf8');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: X-Requested-With, Content-Type");
-//header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json; charset=UTF-8");
 
 $deskripsivoucherminggupertama = "VOUCHER1";
