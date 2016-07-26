@@ -22,7 +22,7 @@ and open the template in the editor.
 
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-        
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <style>
             
             
@@ -51,12 +51,11 @@ and open the template in the editor.
         color: white;
     }
     .logoknk{
-        font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: 700;
     color: white;
-    float: left;
     font-size: 24px;
-    padding: 10px 15px 9px 15px !important;
+    padding: 10px 10px 9px 10px !important;
     display: inline-block;
     text-shadow: 0 1px 1px #FFF;
   
@@ -248,7 +247,7 @@ p{
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  ustify-content: center;
+  justify-content: center;
   padding-left:5px;
   padding-right:5px;
 }
@@ -287,6 +286,16 @@ p{
         <div id="header">
            
             <div class="inner">
+                <input class="visible-xs" type="checkbox" id="drawer-toggle" name="drawer-toggle"/>
+   <label class="visible-xs" for="drawer-toggle" id="drawer-toggle-label"></label>
+    <div class="overlay"></div>
+   <nav id="drawer">
+      <a href="#diskon_today">Diskon Hari Ini</a>
+      <hr>
+                     <a href="http://kliknklik.com/3-notebook">Laptop</a>
+                     <hr>
+                     <a href="http://kliknklik.com/130-smart-phone">Smartphone</a>
+   </nav>
             <a href="http://kliknklik.com" class="logoknk" >KLIKnKLIK</a>
             <div class="mainnav hidden-xs">
                 
@@ -303,11 +312,6 @@ p{
             </form>
             </div>
         </div>
-         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-            <label for="nav-trigger">&#9776</label>
-            <div class="leftmenu">
-                asdcc
-            </div>
             <div id="content">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
   
