@@ -4,28 +4,16 @@ var app = angular.module("MyApp", []);
 
 
 app.controller("feedrss", function($scope, $http) {
-    $scope.data = [];
-    $scope.data2 = [];
-    
+    $scope.expired = [];
+    $scope.today = [];
+    $scope.tomorrow = [];
+    $scope.domain;
  $http.get('regex.php').success(function(response){ //make a get request to mock json file.
-            $scope.data = response[0]; 
-            $scope.data2 = response[1];
-            $scope.domain = response[2];
-            console.log($scope.data);
-            console.log($scope.data2);
-            if($scope.data.produk.length){
-                $scope.adadiskon = response[0].adadiskon;
-            }
-            else{
-                $scope.adadiskon = "";
-            }
-            if($scope.data2.produk.length){
-                $scope.adadiskon2 = response[1].adadiskon;
-            }
-            else{
-                $scope.adadiskon2 = "";
-            }
-         })
+            $scope.expired = response[0]; 
+            $scope.today = response[1];
+            $scope.tomorrow  = response[2]
+            $scope.domain = response[3];
+             })
     .error(function (data, status) {
         //do whatever you want with the error
     });

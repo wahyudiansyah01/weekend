@@ -24,6 +24,7 @@ class produk {
     function __construct($idproduct,$idcartrule) {
         $this->id = $idproduct;
         $p = new ProductCore($this->id);
+        $this->active = $p->active;
         $this->name = $p->name[1];
         $link = new LinkCore;
         $sqli = "select * from ps_image where id_product=".$this->id." and cover=1;";
@@ -54,10 +55,12 @@ class app{
     
     
     function __construct($domain,$descvoucher){
-       $this->domain = $domain; 
+       $this->domain = $domain;
        $this->descvoucher = $descvoucher;
        $this->allproduct = $this->getallproduct($this->descvoucher);
-            
+       $this->today = $this->gettoday($this->allproduct);
+       $this->tomorrow = $this->gettomorrow($this->allproduct);
+       $this->expired = $this->getexpired($this->allproduct);
     }
     
     function getallproduct($descvoucher){
@@ -73,19 +76,71 @@ class app{
         return $array; 
     } 
     
-    function getexpired($allproduct){
+    function gettoday($allproduct){
+        $array = [];
         foreach ($allproduct as $allproducts){
-            if($allproduct)
+            if($allproducts->active==='1' && (date("Y-m-d H:i:s", strtotime($allproducts->voucherfrom)) <  date("Y-m-d H:i:s") ) && ( date("Y-m-d H:i:s") < date("Y-m-d H:i:s", strtotime($allproducts->voucherto)) )){
+                $array[] = $allproducts;
+            }
         }
+        return $array;
     }
     
+    function gettomorrow($allproduct){
+        $array = [];
+        foreach ($allproduct as $allproducts){
+            if($allproducts->active==='1' && (date("Y-m-d H:i:s", strtotime($allproducts->voucherfrom)) >  date("Y-m-d H:i:s") ) ){
+                $array[] = $allproducts;
+            }
+        }
+        return $array;
+    }
     
+    function getexpired($allproduct){
+        $array = [];
+        foreach ($allproduct as $allproducts){
+            if($allproducts->active==='1' && (date("Y-m-d H:i:s", strtotime($allproducts->voucherto)) <  date("Y-m-d H:i:s") ) ){
+                $array[] = $allproducts;
+            }
+        }
+        return $array;
+    }
+    
+    function arraytojson($array){
+        $json= "";
+        foreach ($array as $produk) {
+            if($produk != $array[0]){
+                $json .=",";
+            }
+            $json .="{";
+            $json .='"id":"'.$produk->id.'"';
+            $json .=',';
+            $json .='"nama":"'.$produk->name.'"';
+            $json .=',';
+            $json .='"gambar":"'.$produk->image.'"';
+            $json .=',';
+            $json .='"harga_awal":"'.$produk->baseprice.'"';
+            $json .=',';
+            $json .='"harga_final":"'.$produk->finalprice.'"';
+            $json .=',';
+            $json .='"nilai_voucher":"'.$produk->vouchervalue.'"';
+            $json .=',';
+            $json .='"code_voucher":"'.$produk->codevoucher.'"';
+            $json .=',';
+            $json .='"voucher_from":"'.$produk->voucherfrom.'"';
+            $json .=',';
+            $json .='"voucher_to":"'.$produk->voucherto.'"';
+            $json .="}";
+        }
+        
+        return $json;
+    }
 }
 
-$domain = "kliknklik.com";
-$descvoucher = array("xzy","abc");
-
-var_dump(new app($domain,$descvoucher));
+$domain = "localhost/prestashop";
+$descvoucher = array("xyz","abc");
+$app = new app($domain,$descvoucher);
+echo '[['.$app->arraytojson($app->expired).'],['.$app->arraytojson($app->today).'],['.$app->arraytojson($app->tomorrow).'], "'.$app->domain.'" ]';
 
 
 ?>
