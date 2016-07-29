@@ -30,11 +30,11 @@ class produk {
         $sqli = "select * from ps_image where id_product=".$this->id." and cover=1;";
         $rowi = Db::getInstance()->getRow($sqli);
         $this->image = $link->getImageLink($p->link_rewrite, $rowi['id_image'], 'home_default');
-        $this->baseprice = $p->getPrice();
+        $this->baseprice = money_format("%.0n",$p->getPrice());
         $sqlii = "select  id_cart_rule, date_from, date_to, code, reduction_amount from ps_cart_rule where id_cart_rule=".$idcartrule;
         $rowii = Db::getInstance()->getRow($sqlii);
-        $this->vouchervalue = $rowii['reduction_amount'];
-        $this->finalprice = $this->baseprice - $this->vouchervalue;
+        $this->vouchervalue = money_format("%.0n",$rowii['reduction_amount']);
+        $this->finalprice = money_format("%.0n",$p->getPrice() - $rowii['reduction_amount']);
         $this->codevoucher = $rowii['code'];
         $this->voucherfrom = $rowii['date_from'];
         $this->voucherto = $rowii['date_to']; 
@@ -137,8 +137,8 @@ class app{
     }
 }
 
-$domain = "localhost/prestashop";
-$descvoucher = array("xyz","abc");
+$domain = "kliknklik.com";
+$descvoucher = array("Voucher untuk promo Mendadak Diskon 28 Juli 2016");
 $app = new app($domain,$descvoucher);
 echo '[['.$app->arraytojson($app->expired).'],['.$app->arraytojson($app->today).'],['.$app->arraytojson($app->tomorrow).'], "'.$app->domain.'" ]';
 

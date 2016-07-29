@@ -358,7 +358,7 @@ p{
                                             </strong>
                                         
                             </span></p>
-                        <p>{{produk.code_voucher}}</p>
+                        <p>Kode Voucher{{produk.code_voucher}}</p>
                         </div>
                     </div>
                         </div>
@@ -381,15 +381,12 @@ p{
                             </a>
                             
                         </div>
-                        <div ng-switch="produk.harga_final" class='deskripsiproduk'>
+                      <div class='deskripsiproduk'>
                         <p>{{produk.nama}}</p>
-                        <p><strike>{{produk.harga_awal}}</strike>&emsp;<span style="color:red">{{produk.nilai_voucher}} <span ng-hide="produk.nilai_voucher ==''">OFF</span></span></p>
+                        <p><strike>{{produk.harga_awal}}</strike></p>
                                 <p><span class="pricecurrent">
                                         <span style="font-size:16px;float: left" ng-hide="produk.harga_final == ''">Rp </span>
-                                        <strong style="font-size: 24px" ng-switch-default>
-                                                {{produk.harga_final.slice(2)}}
-                                            </strong>
-                                        <strong style="font-size: 24px" ng-switch-when="diskonhingga">
+                                        <strong style="font-size: 24px">
                                             Diskon Hingga <span style="color:red">?????</span>
                                             </strong>
                                         
@@ -397,9 +394,9 @@ p{
                                             
                                         
                             </span></p>
-                        <p>{{produk.code_voucher}}</p>
+                         
                         </div>
-                    </div>
+                      </div>
                         </div>
                  
                 
